@@ -13,7 +13,7 @@ class TokenImageGenerator {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .center
             let attrs = [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: labelFont, weight: .medium),
+                NSAttributedString.Key.font: UIFont(name: "Trenda-Regular", size: 16) ?? UIFont.systemFont(ofSize: labelFont, weight: .medium),
                 NSAttributedString.Key.foregroundColor: UIColor(hex: "ABABAB"),
                 NSAttributedString.Key.paragraphStyle: paragraphStyle,
             ]

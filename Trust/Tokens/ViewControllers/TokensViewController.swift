@@ -41,13 +41,16 @@ final class TokensViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = StyleLayout.TableView.separatorColor
-        tableView.backgroundColor = .white
-        tableView.register(TokenViewCell.self, forCellReuseIdentifier: TokenViewCell.identifier)
+        tableView.separatorStyle = .none
+        tableView.separatorColor = UIColor.clear//StyleLayout.TableView.separatorColor
+        tableView.backgroundColor = Colors.veryLightGray//.white
+//        tableView.register(TokenViewCell.self, forCellReuseIdentifier: TokenViewCell.identifier)
         tableView.tableHeaderView = header
         tableView.tableFooterView = footer
         tableView.addSubview(refreshControl)
+        tableView.register(UINib(nibName: "TokenViewCell", bundle: nil), forCellReuseIdentifier: "TokenViewCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 65
         return tableView
     }()
 
@@ -182,13 +185,13 @@ extension TokensViewController: UITableViewDelegate {
             self.delegate?.didRequest(token: token, in: self)
             handler(true)
         }
-        deleteAction.backgroundColor = Colors.darkRed
+        deleteAction.backgroundColor = Colors.newDesignNavBarBlue//.darkRed
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TokensLayout.tableView.height
+        return UITableView.automaticDimension//TokensLayout.tableView.height
     }
 }
 extension TokensViewController: UITableViewDataSource {
@@ -204,6 +207,7 @@ extension TokensViewController: UITableViewDataSource {
        guard let tokenViewCell = cell as? TokenViewCell else { return }
        tokenViewCell.configure(viewModel: viewModel.cellViewModel(for: indexPath))
     }
+    
 }
 extension TokensViewController: TokensViewModelDelegate {
     func refresh() {

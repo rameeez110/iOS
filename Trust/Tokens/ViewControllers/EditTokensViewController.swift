@@ -101,15 +101,15 @@ final class EditTokensViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TokensLayout.tableView.height
+        return UITableView.automaticDimension//TokensLayout.tableView.height
     }
 
     func configureTableView() {
         tableView.register(R.nib.editTokenTableViewCell(), forCellReuseIdentifier: R.nib.editTokenTableViewCell.name)
         tableView.tableHeaderView = searchController.searchBar
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = StyleLayout.TableView.separatorColor
-        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.separatorColor = .clear//StyleLayout.TableView.separatorColor
+        tableView.backgroundColor = Colors.veryLightGray
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
@@ -196,13 +196,13 @@ extension EditTokensViewController: UISearchBarDelegate {
 
 extension EditTokensViewController: UISearchControllerDelegate {
     func willPresentSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.barTintColor = Colors.darkRed
+        searchController.searchBar.barTintColor = Colors.newDesignNavBarBlue//.darkRed
         searchController.searchBar.tintColor = .white
     }
 
     func willDismissSearchController(_ searchController: UISearchController) {
         searchController.searchBar.barTintColor = Colors.lightGray
-        searchController.searchBar.tintColor = Colors.darkRed
+        searchController.searchBar.tintColor = Colors.newDesignNavBarBlue//.darkRed
     }
 }
 

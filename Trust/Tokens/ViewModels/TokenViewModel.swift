@@ -41,7 +41,7 @@ final class TokenViewModel {
     }
 
     var amountFont: UIFont {
-        return UIFont.systemFont(ofSize: 18, weight: .medium)
+        return UIFont(name: "Trenda-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18, weight: .medium)
     }
 
     let titleFormmater: DateFormatter = {
@@ -114,7 +114,7 @@ final class TokenViewModel {
     }
 
     var marketPriceFont: UIFont {
-        return UIFont.systemFont(ofSize: 14, weight: .regular)
+        return UIFont(name: "Trenda-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
     }
 
     var marketPriceTextColor: UIColor {
@@ -131,7 +131,7 @@ final class TokenViewModel {
     }
 
     var fiatAmountFont: UIFont {
-        return UIFont.systemFont(ofSize: 14, weight: .regular)
+        return UIFont(name: "Trenda-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .regular)
     }
 
     var amountTextColor: UIColor {
@@ -147,7 +147,7 @@ final class TokenViewModel {
     }
 
     var percentChangeFont: UIFont {
-        return UIFont.systemFont(ofSize: 12, weight: .light)
+        return UIFont(name: "Trenda-Light", size: 12) ?? UIFont.systemFont(ofSize: 12, weight: .light)
     }
 
     var percentChange: String? {
@@ -155,7 +155,7 @@ final class TokenViewModel {
     }
 
     var currencyAmountFont: UIFont {
-        return UIFont.systemFont(ofSize: 13, weight: .regular)
+        return UIFont(name: "Trenda-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
     }
 
     func fetch() {

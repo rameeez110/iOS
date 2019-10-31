@@ -6,7 +6,7 @@ import TrustCore
 
 struct TransactionSection {
     let title: String
-    let items: [Transaction]
+    var items: [Transaction]
 }
 
 class TransactionsStorage {

@@ -196,13 +196,13 @@ extension EditTokensViewController: UISearchBarDelegate {
 
 extension EditTokensViewController: UISearchControllerDelegate {
     func willPresentSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.barTintColor = Colors.newDesignNavBarBlue//.darkRed
+        searchController.searchBar.barTintColor = Colors.darkRed
         searchController.searchBar.tintColor = .white
     }
 
     func willDismissSearchController(_ searchController: UISearchController) {
         searchController.searchBar.barTintColor = Colors.lightGray
-        searchController.searchBar.tintColor = Colors.newDesignNavBarBlue//.darkRed
+        searchController.searchBar.tintColor = Colors.darkRed
     }
 }
 

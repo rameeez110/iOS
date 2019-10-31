@@ -35,8 +35,9 @@ final class SendCoordinator: RootCoordinator {
         controller.hidesBottomBarWhenPushed = true
         switch transfer.type {
         case .ether(_, let destination):
-            controller.addressRow?.value = destination?.description
-            controller.addressRow?.cell.row.updateCell()
+            controller.recipientAddressTextField.text = destination?.description
+//            controller.addressRow?.value = destination?.description
+//            controller.addressRow?.cell.row.updateCell()
         case .token, .dapp: break
         }
         controller.delegate = self

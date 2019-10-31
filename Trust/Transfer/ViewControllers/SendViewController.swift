@@ -18,7 +18,14 @@ protocol SendViewControllerDelegate: class {
     )
 }
 
-class SendViewController: FormViewController {
+class SendViewController: UIViewController {//: FormViewController {
+    
+    @IBOutlet weak var recipientAddressTextField: UITextField!
+    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var memoTextField: UITextField!
+    
+    @IBOutlet weak var sendButton: UIButton!
+    
     private lazy var viewModel: SendViewModel = {
         let balance = Balance(value: transfer.type.token.valueBigInt)
         return .init(transfer: transfer, config: session.config, chainState: chainState, storage: storage, balance: balance)
@@ -33,12 +40,12 @@ class SendViewController: FormViewController {
     let transfer: Transfer
     let storage: TokensDataStore
     let chainState: ChainState
-    var addressRow: TextFloatLabelRow? {
-        return form.rowBy(tag: Values.address) as? TextFloatLabelRow
-    }
-    var amountRow: TextFloatLabelRow? {
-        return form.rowBy(tag: Values.amount) as? TextFloatLabelRow
-    }
+//    var addressRow: TextFloatLabelRow? {
+//        return form.rowBy(tag: Values.address) as? TextFloatLabelRow
+//    }
+//    var amountRow: TextFloatLabelRow? {
+//        return form.rowBy(tag: Values.amount) as? TextFloatLabelRow
+//    }
     lazy var maxButton: UIButton = {
         let button = Button(size: .normal, style: .borderless)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +70,7 @@ class SendViewController: FormViewController {
         self.transfer = transfer
         self.storage = storage
         self.chainState = chainState
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "SendViewController", bundle: nil)
         title = viewModel.title
         view.backgroundColor = viewModel.backgroundColor
 
@@ -74,17 +81,24 @@ class SendViewController: FormViewController {
             action: #selector(send)
         )
 
-        let section = Section(header: "", footer: viewModel.isFiatViewHidden() ? "" : viewModel.pairRateRepresantetion())
-        fields().forEach { cell in
-            section.append(cell)
-        }
-        form = Section()
-            +++ section
+//        let section = Section(header: "", footer: viewModel.isFiatViewHidden() ? "" : viewModel.pairRateRepresantetion())
+//        fields().forEach { cell in
+//            section.append(cell)
+//        }
+//        form = Section()
+//            +++ section
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.applyTintAdjustment()
+        self.view.backgroundColor = Colors.veryLightGray
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.setupUI()
     }
 
     private func fields() -> [BaseRow] {
@@ -98,6 +112,50 @@ class SendViewController: FormViewController {
         case .amount:
             return amountField()
         }
+    }
+    
+    func setupUI() {
+        
+        self.sendButton.layer.cornerRadius = 10
+        self.sendButton.clipsToBounds = true
+        
+        self.memoTextField.textAlignment = .left
+        self.memoTextField.placeholder = "MEMO" //NSLocalizedString("send.recipientAddress.textField.placeholder", value: "Recipient Address", comment: "")
+        self.memoTextField.rightViewMode = .always
+        self.memoTextField.accessibilityIdentifier = "memo-field"
+        
+        let recipientRightView = AddressFieldView()
+        recipientRightView.translatesAutoresizingMaskIntoConstraints = false
+        recipientRightView.pasteButton.addTarget(self, action: #selector(pasteAction), for: .touchUpInside)
+        recipientRightView.qrButton.addTarget(self, action: #selector(openReader), for: .touchUpInside)
+        
+        self.recipientAddressTextField.textAlignment = .left
+        self.recipientAddressTextField.placeholder = NSLocalizedString("send.recipientAddress.textField.placeholder", value: "Recipient Address", comment: "")
+        self.recipientAddressTextField.rightView = recipientRightView
+        self.recipientAddressTextField.rightViewMode = .always
+        self.recipientAddressTextField.accessibilityIdentifier = "amount-field"
+        
+        let fiatButton = Button(size: .normal, style: .borderless)
+        fiatButton.translatesAutoresizingMaskIntoConstraints = false
+        fiatButton.setTitle(viewModel.currentPair.right, for: .normal)
+        fiatButton.addTarget(self, action: #selector(fiatAction), for: .touchUpInside)
+        fiatButton.isHidden = viewModel.isFiatViewHidden()
+        let amountRightView = UIStackView(arrangedSubviews: [
+            maxButton,
+            fiatButton,
+        ])
+        amountRightView.translatesAutoresizingMaskIntoConstraints = false
+        amountRightView.distribution = .fill
+        amountRightView.spacing = 1
+        amountRightView.axis = .horizontal
+        
+        self.amountTextField.isCopyPasteDisabled = true
+        self.amountTextField.textAlignment = .left
+        self.amountTextField.delegate = self
+        self.amountTextField.placeholder = "\(self.viewModel.currentPair.left ) " + NSLocalizedString("send.amount.textField.placeholder", value: "Amount", comment: "")
+        self.amountTextField.keyboardType = .decimalPad
+        self.amountTextField.rightView = amountRightView
+        self.amountTextField.rightViewMode = .always
     }
 
     func addressField() -> TextFloatLabelRow {
@@ -129,7 +187,7 @@ class SendViewController: FormViewController {
             fiatButton,
         ])
         amountRightView.translatesAutoresizingMaskIntoConstraints = false
-        amountRightView.distribution = .equalSpacing
+        amountRightView.distribution = .fill
         amountRightView.spacing = 1
         amountRightView.axis = .horizontal
         return AppFormAppearance.textFieldFloat(tag: Values.amount) {
@@ -145,21 +203,27 @@ class SendViewController: FormViewController {
             cell.textField.rightViewMode = .always
         }
     }
+    
+    @IBAction func didTapSend() {
+        self.send()
+    }
 
     func clear() {
-        let fields = [addressRow, amountRow]
-        for field in fields {
-            field?.value = ""
-            field?.reload()
-        }
+        self.recipientAddressTextField.text = ""
+        self.amountTextField.text = ""
+//        let fields = [addressRow, amountRow]
+//        for field in fields {
+//            field?.value = ""
+//            field?.reload()
+//        }
     }
 
     @objc func send() {
-        let errors = form.validate()
-        guard errors.isEmpty else { return }
-        let addressString = addressRow?.value?.trimmed ?? ""
+//        let errors = form.validate()
+//        guard errors.isEmpty else { return }
+//        let addressString = addressRow?.value?.trimmed ?? ""
         let amountString = viewModel.amount
-        guard let address = EthereumAddress(string: addressString) else {
+        guard let address = EthereumAddress(string: self.recipientAddressTextField.text ?? "") else {
             return displayError(error: Errors.invalidAddress)
         }
         let parsedValue: BigInt? = {
@@ -197,14 +261,16 @@ class SendViewController: FormViewController {
         guard CryptoAddressValidator.isValidAddress(value) else {
             return displayError(error: Errors.invalidAddress)
         }
-        addressRow?.value = value
-        addressRow?.reload()
+        self.recipientAddressTextField.text = value
+//        addressRow?.value = value
+//        addressRow?.reload()
         activateAmountView()
     }
     @objc func useMaxAmount() {
-        amountRow?.value = viewModel.sendMaxAmount()
+        self.amountTextField.text = viewModel.sendMaxAmount()
+//        amountRow?.value = viewModel.sendMaxAmount()
         updatePriceSection()
-        amountRow?.reload()
+//        amountRow?.reload()
     }
     @objc func fiatAction(sender: UIButton) {
         let swappedPair = viewModel.currentPair.swapPair()
@@ -215,8 +281,9 @@ class SendViewController: FormViewController {
         //Hide max button
         maxButton.isHidden = viewModel.isMaxButtonHidden()
         //Reset amountRow value.
-        amountRow?.value = nil
-        amountRow?.reload()
+        self.amountTextField.text = ""
+//        amountRow?.value = nil
+//        amountRow?.reload()
         //Reset pair value.
         viewModel.pairRate = 0.0
         //Update section.
@@ -225,7 +292,8 @@ class SendViewController: FormViewController {
         activateAmountView()
     }
     func activateAmountView() {
-        amountRow?.cell.textField.becomeFirstResponder()
+        self.recipientAddressTextField.becomeFirstResponder()
+//        amountRow?.cell.textField.becomeFirstResponder()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -236,14 +304,14 @@ class SendViewController: FormViewController {
             return
         }
         //We use this section update to prevent update of the all section including cells.
-        UIView.setAnimationsEnabled(false)
+        /*UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
         if let containerView = tableView.footerView(forSection: 1) {
             containerView.textLabel!.text = viewModel.pairRateRepresantetion()
             containerView.sizeToFit()
         }
         tableView.endUpdates()
-        UIView.setAnimationsEnabled(true)
+        UIView.setAnimationsEnabled(true)*/
     }
 }
 extension SendViewController: QRCodeReaderDelegate {
@@ -258,8 +326,9 @@ extension SendViewController: QRCodeReaderDelegate {
         }
 
         guard let result = QRURLParser.from(string: result) else { return }
-        addressRow?.value = result.address
-        addressRow?.reload()
+        self.recipientAddressTextField.text = result.address
+//        addressRow?.value = result.address
+//        addressRow?.reload()
 
         if let dataString = result.params["data"] {
             data = Data(hex: dataString.drop0x)
@@ -268,14 +337,16 @@ extension SendViewController: QRCodeReaderDelegate {
         }
 
         if let value = result.params["amount"] {
-            amountRow?.value = value
+            self.amountTextField.text = value
+//            amountRow?.value = value
             let amount = viewModel.decimalAmount(with: value)
             viewModel.updatePairPrice(with: amount)
         } else {
-            amountRow?.value = ""
+//            amountRow?.value = ""
+            self.amountTextField.text = ""
             viewModel.pairRate = 0.0
         }
-        amountRow?.reload()
+//        amountRow?.reload()
         updatePriceSection()
     }
 }

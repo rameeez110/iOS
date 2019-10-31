@@ -50,7 +50,7 @@ extension UIViewController {
 
     func openURL(_ url: URL) {
         let controller = SFSafariViewController(url: url)
-        controller.preferredBarTintColor = Colors.newDesignNavBarBlue//.darkRed
+        controller.preferredBarTintColor = Colors.darkRed
         controller.modalPresentationStyle = .pageSheet
         present(controller, animated: true, completion: nil)
     }

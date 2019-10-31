@@ -14,7 +14,7 @@ struct TransactionCellViewModel {
     private let token: TokenObject
     private let shortFormatter = EtherNumberFormatter.short
 
-    private let transactionViewModel: TransactionViewModel
+    let transactionViewModel: TransactionViewModel
 
     init(
         transaction: Transaction,

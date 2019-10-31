@@ -180,6 +180,9 @@ extension TokensCoordinator: TokensViewControllerDelegate {
     func didPressAddToken(in viewController: UIViewController) {
         addToken()
     }
+    func didTapCreateWallet(in viewController: UIViewController) {
+        self.edit()
+    }
 }
 
 extension TokensCoordinator: NewTokenViewControllerDelegate {

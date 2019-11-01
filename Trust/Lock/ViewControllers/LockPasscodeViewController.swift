@@ -21,7 +21,9 @@ class LockPasscodeViewController: UIViewController {
         self.configureInvisiblePasscodeField()
         self.configureLockView()
         if !invisiblePasscodeField.isFirstResponder && !lock.incorrectMaxAttemptTimeIsSet() {
-            invisiblePasscodeField.becomeFirstResponder()
+            if !self.lock.shouldShowProtection() {
+                invisiblePasscodeField.becomeFirstResponder()
+            }
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,7 +40,7 @@ class LockPasscodeViewController: UIViewController {
         invisiblePasscodeField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         view.addSubview(invisiblePasscodeField)
     }
-
+    
     public func configureLockView() {
         lockView = LockView(model)
         lockView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,25 +50,31 @@ class LockPasscodeViewController: UIViewController {
         lockView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         lockView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
     }
-
+    
     @objc func enteredPasscode(_ passcode: String) {
         shouldIgnoreTextFieldDelegateCalls = false
         clearPasscode()
     }
     func clearPasscode() {
         invisiblePasscodeField.text = ""
-        for characterView in lockView.characters {
-            characterView.setEmpty(true)
+        if lockView != nil {
+            for characterView in lockView.characters {
+                characterView.setEmpty(true)
+            }
         }
     }
     func hideKeyboard() {
-         invisiblePasscodeField.resignFirstResponder()
+        if invisiblePasscodeField.isFirstResponder {
+            invisiblePasscodeField.resignFirstResponder()
+        }
     }
     func showKeyboard() {
         invisiblePasscodeField.becomeFirstResponder()
     }
     func finish(withResult success: Bool, animated: Bool) {
-        invisiblePasscodeField.resignFirstResponder()
+        if invisiblePasscodeField.isFirstResponder {
+            invisiblePasscodeField.resignFirstResponder()
+        }
         if let finish = willFinishWithResult {
             finish(success)
         } else {
@@ -77,7 +85,7 @@ class LockPasscodeViewController: UIViewController {
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 UIView.animate(withDuration: 0.1, animations: { () -> Void in
-                   self.lockView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -keyboardSize.height).isActive = true
+                    self.lockView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -keyboardSize.height).isActive = true
                 })
             }
         }

@@ -30,7 +30,6 @@ final class AuthenticateUserCoordinator: Coordinator {
 
     func start() {
         guard lock.shouldShowProtection() else { return }
-
         navigationController.present(lockEnterPasscodeViewController, animated: true)
     }
 

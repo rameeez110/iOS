@@ -23,7 +23,7 @@ final class LockEnterPasscodeCoordinator: Coordinator {
 
     func start() {
         guard lock.shouldShowProtection() else { return }
-
+        
         window.rootViewController = lockEnterPasscodeViewController
         window.makeKeyAndVisible()
     }

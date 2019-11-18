@@ -39,11 +39,12 @@ enum AppStyle {
     var textColor: UIColor {
         switch self {
         case .heading, .headingSemiBold:
-            return Colors.black
+            return Colors.black()
         case .paragraph, .paragraphLight, .paragraphSmall:
             return Colors.charcoal
         case .largeAmount:
-            return UIColor.black // Usually colors based on the amount
+//            return UIColor.black // Usually colors based on the amount
+            return Colors.black()
         case .error:
             return Colors.errorRed
         case .formHeader:

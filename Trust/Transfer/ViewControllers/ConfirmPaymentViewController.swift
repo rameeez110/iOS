@@ -73,7 +73,15 @@ class ConfirmPaymentViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: R.image.transactionSlider(), style: .done, target: self, action: #selector(edit))
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
         navigationItem.title = viewModel.title
 
         errorView = ErrorView(onRetry: { [weak self] in

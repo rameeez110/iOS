@@ -22,6 +22,12 @@ final class TokensViewController: UIViewController {
         header.amountLabel.textColor = viewModel.headerBalanceTextColor
         header.backgroundColor = viewModel.headerBackgroundColor
         header.amountLabel.font = viewModel.headerBalanceFont
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            header.amountLabel.textColor = UIColor.label
+            header.backgroundColor = UIColor.systemBackground
+        }
         header.frame.size = header.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
         return header
     }()
@@ -31,6 +37,11 @@ final class TokensViewController: UIViewController {
         footer.textLabel.text = "Empty Wallet!" // viewModel.footerTitle
         footer.textLabel.font = viewModel.footerTextFont
         footer.textLabel.textColor = viewModel.footerTextColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            footer.textLabel.textColor = UIColor.label
+        }
         footer.frame.size = footer.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
         footer.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(missingToken))
@@ -44,7 +55,15 @@ final class TokensViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.separatorColor = UIColor.clear // StyleLayout.TableView.separatorColor
-        tableView.backgroundColor = Colors.veryLightGray // .white
+//        tableView.backgroundColor = Colors.veryLightGray//.white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            tableView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            tableView.backgroundColor = Colors.veryVeryLightGray
+        }
 //        tableView.register(TokenViewCell.self, forCellReuseIdentifier: TokenViewCell.identifier)
         tableView.tableHeaderView = header
         tableView.tableFooterView = footer
@@ -91,9 +110,16 @@ final class TokensViewController: UIViewController {
         super.viewDidLoad()
         startTokenObservation()
         title = viewModel.title
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
         footer.textLabel.text = "Empty Wallet!" // viewModel.footerTitle
-
         fetch(force: true)
     }
 
@@ -111,6 +137,7 @@ final class TokensViewController: UIViewController {
             footer.createButton.isHidden = true
         }
         tableView.tableFooterView = footer
+//        tableView.reloadData()
     }
 
     @objc func pullToRefresh() {
@@ -214,7 +241,7 @@ extension TokensViewController: UITableViewDelegate {
 extension TokensViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TokenViewCell.identifier, for: indexPath) as! TokenViewCell
-        cell.isExclusiveTouch = true
+//        cell.isExclusiveTouch = true
         return cell
     }
 

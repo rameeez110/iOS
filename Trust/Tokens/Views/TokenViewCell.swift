@@ -154,6 +154,16 @@ final class TokenViewCell: UITableViewCell {
         currencyAmountLabel.textColor = TokensLayout.cell.currencyAmountTextColor
         currencyAmountLabel.font = viewModel.currencyAmountFont
 
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            currencyAmountLabel.textColor = UIColor.label
+            marketPercentageChange.textColor = UIColor.label
+            marketPrice.textColor = UIColor.label
+            titleLabel.textColor = UIColor.label
+            amountLabel.textColor = UIColor.label
+        }
+
         symbolImageView.kf.setImage(
             with: viewModel.imageURL,
             placeholder: viewModel.placeholderImage

@@ -14,7 +14,7 @@ struct SettingsViewModel {
     var servers: [RPCServer] {
         return [
             RPCServer.ether1,
-            RPCServer.Xerom,
+            RPCServer.xerom,
             RPCServer.main,
             RPCServer.classic,
             RPCServer.poa,

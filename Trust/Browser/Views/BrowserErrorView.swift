@@ -57,7 +57,15 @@ final class BrowserErrorView: UIView {
     }
 
     private func finishInit() {
-        backgroundColor = .white
+//        self.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            self.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            backgroundColor = .white
+        }
         addSubview(textLabel)
         addSubview(reloadButton)
         NSLayoutConstraint.activate([

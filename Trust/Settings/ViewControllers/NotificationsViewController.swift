@@ -52,6 +52,14 @@ final class NotificationsViewController: FormViewController {
                 $0.value = NotificationsViewController.isPushNotificationEnabled
             }.onChange { [unowned self] row in
                 self.didChange?(.state(isEnabled: row.value ?? false))
+            }.cellUpdate { cell, _ in
+                cell.textLabel?.textAlignment = .left
+                cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
 
             +++ Section(
@@ -71,6 +79,14 @@ final class NotificationsViewController: FormViewController {
                 $0.disabled = Condition(booleanLiteral: true)
             }.cellSetup { cell, _ in
                 cell.switchControl.isEnabled = false
+            }.cellUpdate { cell, _ in
+                cell.textLabel?.textAlignment = .left
+                cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
     }
 

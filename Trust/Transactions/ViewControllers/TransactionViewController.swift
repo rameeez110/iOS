@@ -45,7 +45,15 @@ final class TransactionViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         title = viewModel.title
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
 
         let header = TransactionHeaderView()
         header.translatesAutoresizingMaskIntoConstraints = false

@@ -57,6 +57,11 @@ struct AppFormAppearance {
                 }.cellUpdate { cell, _ in
                     cell.textLabel?.font = AppStyle.error.font
                     cell.textLabel?.textColor = AppStyle.error.textColor
+                    if #available(iOS 13.0, *) {
+                        // use the feature only available in iOS 9
+                        // for ex. UIStackView
+                        cell.textLabel?.textColor = .label
+                    }
                 }
                 row.section?.insert(labelRow, at: row.indexPath!.row + index + 1)
             }
@@ -68,6 +73,11 @@ struct AppFormAppearance {
             .cellUpdate { cell, _ in
                 cell.textLabel?.textAlignment = .left
                 cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
         callback(button)
         return button

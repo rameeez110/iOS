@@ -29,7 +29,7 @@ struct TokenViewCellViewModel {
     }
 
     var titleTextColor: UIColor {
-        return Colors.black
+        return Colors.black()
     }
 
     var amount: String {
@@ -53,7 +53,7 @@ struct TokenViewCellViewModel {
     }
 
     var amountTextColor: UIColor {
-        return Colors.black
+        return Colors.black()
     }
 
     var currencyAmountTextColor: UIColor {

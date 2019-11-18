@@ -27,7 +27,7 @@ struct ConfigExplorer {
                 return endpoint + "/tx/" + ID
             case .ether1:
                 return endpoint + "/tx/" + ID
-            case .Xerom:
+            case .xerom:
                 return endpoint + "/tx/" + ID
             }
         }()
@@ -49,7 +49,7 @@ struct ConfigExplorer {
             return "https://explorer.gochain.io"
         case .ether1:
             return "https://explorer.ether1.org"
-        case .Xerom:
+        case .xerom:
             return "https://explorer.xerom.org"
         }
     }

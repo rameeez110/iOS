@@ -29,7 +29,13 @@ enum ButtonStyle: Int {
     var backgroundColor: UIColor {
         switch self {
         case .solid, .squared: return Colors.darkRed
-        case .border, .borderless: return .white
+        case .border, .borderless:
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                return UIColor.systemBackground
+            }
+            return .white
         case .clear: return .clear
         }
     }

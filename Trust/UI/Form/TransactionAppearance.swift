@@ -123,7 +123,15 @@ struct TransactionAppearance {
 extension UIStackView {
     func addBackground(color: UIColor) {
         let subView = UIView(frame: bounds)
-        subView.backgroundColor = color
+//        subView.backgroundColor = color
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            subView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            subView.backgroundColor = color
+        }
         subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         insertSubview(subView, at: 0)
     }

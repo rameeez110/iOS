@@ -18,7 +18,15 @@ class LockPasscodeViewController: UIViewController {
     override func viewDidLoad() {
         navigationItem.hidesBackButton = true
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        view.backgroundColor = UIColor.white
+//        self.view.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            self.view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = .white
+        }
         configureInvisiblePasscodeField()
         configureLockView()
         if !invisiblePasscodeField.isFirstResponder, !lock.incorrectMaxAttemptTimeIsSet() {

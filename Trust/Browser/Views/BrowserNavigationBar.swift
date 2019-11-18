@@ -22,7 +22,15 @@ final class BrowserNavigationBar: UINavigationBar {
         super.init(frame: frame)
 
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = .white
+//        textField.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            textField.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            textField.backgroundColor = .white
+        }
         textField.layer.cornerRadius = 5
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = Colors.lightGray.cgColor

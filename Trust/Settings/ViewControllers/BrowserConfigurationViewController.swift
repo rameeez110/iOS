@@ -43,6 +43,14 @@ final class BrowserConfigurationViewController: FormViewController {
                 selectorController.sectionKeyForValue = { _ in
                     ""
                 }
+            }.cellUpdate { cell, _ in
+                cell.textLabel?.textAlignment = .left
+                cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
 
             +++ Section()
@@ -55,6 +63,11 @@ final class BrowserConfigurationViewController: FormViewController {
             }.cellUpdate { cell, _ in
                 cell.textLabel?.textAlignment = .left
                 cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
     }
 

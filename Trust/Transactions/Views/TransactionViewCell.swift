@@ -78,6 +78,15 @@ final class TransactionViewCell: UITableViewCell {
         amountLabel.textColor = viewModel.amountTextColor
 
         backgroundColor = viewModel.backgroundColor
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            backgroundColor = UIColor.systemBackground
+            titleLabel.textColor = UIColor.label
+            subTitleLabel.textColor = UIColor.label
+            amountLabel.textColor = UIColor.label
+        }
     }
 
     private func updateSeparatorInset() {

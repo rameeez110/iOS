@@ -27,7 +27,7 @@ struct EditTokenTableCellViewModel {
     }
 
     var titleTextColor: UIColor {
-        return Colors.black
+        return Colors.black()
     }
 
     var placeholderImage: UIImage? {

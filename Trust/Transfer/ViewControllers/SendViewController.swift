@@ -75,7 +75,15 @@ class SendViewController: UIViewController { //: FormViewController {
         self.chainState = chainState
         super.init(nibName: "SendViewController", bundle: nil)
         title = viewModel.title
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: R.string.localizable.next(),
@@ -95,7 +103,15 @@ class SendViewController: UIViewController { //: FormViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.applyTintAdjustment()
-        view.backgroundColor = Colors.veryLightGray
+//        self.view.backgroundColor = Colors.veryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            self.view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = Colors.veryLightGray
+        }
     }
 
     override func viewDidLoad() {

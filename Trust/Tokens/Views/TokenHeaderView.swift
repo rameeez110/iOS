@@ -9,7 +9,7 @@ final class TokenHeaderView: UIView {
 
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.textColor = Colors.black
+        label.textColor = Colors.black()
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -29,7 +29,7 @@ final class TokenHeaderView: UIView {
 
     lazy var fiatAmountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.textColor = Colors.black
+        label.textColor = Colors.black()
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

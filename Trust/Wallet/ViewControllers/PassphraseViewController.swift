@@ -50,7 +50,15 @@ class PassphraseViewController: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
 
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
 
         setupViews(for: mode)
     }
@@ -77,7 +85,7 @@ class PassphraseViewController: UIViewController {
         wordsLabel.text = words.joined(separator: "  ")
         wordsLabel.backgroundColor = .clear
         wordsLabel.font = UIFont(name: "Trenda-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .regular)
-        wordsLabel.textColor = Colors.black
+        wordsLabel.textColor = Colors.black()
         wordsLabel.textAlignment = .center
         wordsLabel.numberOfLines = 3
         wordsLabel.isUserInteractionEnabled = true

@@ -22,7 +22,15 @@ final class WelcomeViewController: UIViewController {
         collectionViewController.pageControl = pageControl
         collectionViewController.collectionView?.isPagingEnabled = true
         collectionViewController.collectionView?.showsHorizontalScrollIndicator = false
-        collectionViewController.collectionView?.backgroundColor = viewModel.backgroundColor
+//        collectionViewController.collectionView?.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            collectionViewController.collectionView?.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            collectionViewController.collectionView?.backgroundColor = viewModel.backgroundColor
+        }
         return collectionViewController
     }()
 
@@ -119,7 +127,15 @@ final class WelcomeViewController: UIViewController {
 
     func configure(viewModel: WelcomeViewModel) {
         title = viewModel.title
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
         pageControl.currentPageIndicatorTintColor = viewModel.currentPageIndicatorTintColor
         pageControl.pageIndicatorTintColor = viewModel.pageIndicatorTintColor
         pageControl.numberOfPages = viewModel.numberOfPages

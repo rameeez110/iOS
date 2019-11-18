@@ -29,7 +29,15 @@ final class BookmarkViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = Colors.veryLightGray
+//        tableView.backgroundColor = Colors.veryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            tableView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            tableView.backgroundColor = Colors.veryLightGray
+        }
         tableView.rowHeight = 60
         tableView.register(R.nib.bookmarkViewCell(), forCellReuseIdentifier: R.nib.bookmarkViewCell.name)
         view.addSubview(tableView)

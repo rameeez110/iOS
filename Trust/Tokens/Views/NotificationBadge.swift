@@ -58,7 +58,15 @@ extension UIView {
         badgeLabel.textAlignment = appearance.textAlignment
 
         badgeLabel.layer.backgroundColor = appearance.backgroundColor.cgColor
-        badgeLabel.textColor = appearance.textColor
+//        badgeLabel.textColor = appearance.textColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            badgeLabel.textColor = UIColor.label
+        } else {
+            // or use some work around
+            badgeLabel.textColor = appearance.textColor
+        }
 
         let badgeSize = badgeLabel.frame.size
 

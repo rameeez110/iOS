@@ -26,11 +26,27 @@ final class TokensViewModel: NSObject {
     }
 
     var headerBalanceTextColor: UIColor {
-        return Colors.black
+//        return Colors.black()
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            return UIColor.label
+        } else {
+            // or use some work around
+            return Colors.black()
+        }
     }
 
     var headerBackgroundColor: UIColor {
-        return Colors.veryVeryLightGray
+//        return Colors.veryVeryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            return UIColor.systemBackground
+        } else {
+            // or use some work around
+            return Colors.veryVeryLightGray
+        }
     }
 
     var headerBalanceFont: UIFont {
@@ -42,7 +58,15 @@ final class TokensViewModel: NSObject {
     }
 
     var backgroundColor: UIColor {
-        return .white
+//        return .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            return UIColor.systemBackground
+        } else {
+            // or use some work around
+            return .white
+        }
     }
 
     var footerTitle: String {
@@ -50,7 +74,7 @@ final class TokensViewModel: NSObject {
     }
 
     var footerTextColor: UIColor {
-        return Colors.black
+        return Colors.black()
     }
 
     var footerTextFont: UIFont {

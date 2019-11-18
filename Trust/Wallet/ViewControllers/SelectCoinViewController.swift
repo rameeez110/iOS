@@ -29,7 +29,15 @@ class SelectCoinViewController: UITableViewController {
         tableView.separatorStyle = .none
         tableView.separatorColor = StyleLayout.TableView.separatorColor
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.backgroundColor = Colors.veryLightGray
+//        tableView.backgroundColor = Colors.veryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            tableView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            tableView.backgroundColor = Colors.veryLightGray
+        }
         tableView.register(R.nib.coinViewCell(), forCellReuseIdentifier: R.nib.coinViewCell.name)
         tableView.tableFooterView = UIView()
         navigationItem.title = viewModel.title

@@ -30,7 +30,15 @@ final class SectionHeader: UIView {
     }
 
     private func addLayout() {
-        backgroundColor = fillColor
+//        self.backgroundColor = fillColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            self.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            backgroundColor = fillColor
+        }
 
         let topBorder = UIView()
         topBorder.backgroundColor = borderColor

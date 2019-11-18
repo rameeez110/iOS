@@ -19,11 +19,22 @@ struct Colors {
     static let gray = UIColor.gray
     static let darkGray = UIColor(hex: "606060")
     static let doveGray = UIColor(hex: "6e6e72")
-    static let black = UIColor(hex: "313849")
+//    static let black = UIColor(hex: "313849")
     static let whisper = UIColor(hex: "EBEAEA")
     static let charcoal = UIColor(hex: "464646")
     static let lightBlack = UIColor(hex: "313849")
     static let lightBlue = UIColor(hex: "007aff")
     static let lightDark = UIColor(hex: "333333")
     static let groupTable = UIColor(hex: "efeff4")
+
+    static func black() -> UIColor {
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            return UIColor.label
+        } else {
+            // or use some work around
+            return UIColor(hex: "313849")
+        }
+    }
 }

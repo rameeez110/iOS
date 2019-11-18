@@ -28,7 +28,15 @@ class WalletsViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.backgroundColor = Colors.veryLightGray
+//        tableView.backgroundColor = Colors.veryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            tableView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            tableView.backgroundColor = Colors.veryLightGray
+        }
         tableView.separatorColor = .clear // StyleLayout.TableView.separatorColor
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(R.nib.walletViewCell(), forCellReuseIdentifier: R.nib.walletViewCell.name)

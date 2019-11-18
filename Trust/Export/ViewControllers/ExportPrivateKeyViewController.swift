@@ -55,7 +55,15 @@ final class ExportPrivateKeyViewConroller: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
 
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
 
         let stackView = UIStackView(
             arrangedSubviews: [
@@ -71,7 +79,15 @@ final class ExportPrivateKeyViewConroller: UIViewController {
         stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
-        view.backgroundColor = viewModel.backgroundColor
+//        view.backgroundColor = viewModel.backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = viewModel.backgroundColor
+        }
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([

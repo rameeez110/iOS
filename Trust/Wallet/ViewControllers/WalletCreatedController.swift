@@ -47,7 +47,15 @@ final class WalletCreatedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = .white
+        }
 
         let stackView = UIStackView(arrangedSubviews: [
             imageView,

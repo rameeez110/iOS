@@ -18,7 +18,15 @@ final class NonFungibleTokenViewCell: UITableViewCell {
 
     func configure(viewModel: NonFungibleTokenCellViewModel) {
         self.viewModel = viewModel
-        collectionView.backgroundColor = self.viewModel?.collectionViewBacgroundColor
+//        collectionView.backgroundColor = self.viewModel?.collectionViewBacgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            collectionView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            collectionView.backgroundColor = .white
+        }
         collectionView.reloadData()
     }
 }

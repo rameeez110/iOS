@@ -32,6 +32,12 @@ final class EditTokensViewController: UITableViewController {
         searchController.searchBar.placeholder = viewModel.searchPlaceholder
         searchController.searchBar.sizeToFit()
         searchController.searchBar.barTintColor = Colors.veryVeryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            searchController.searchBar.barTintColor = UIColor.secondarySystemBackground
+            searchController.searchBar.searchTextField.textColor = UIColor.label
+        }
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         return searchController
@@ -109,7 +115,15 @@ final class EditTokensViewController: UITableViewController {
         tableView.tableHeaderView = searchController.searchBar
         tableView.separatorStyle = .none
         tableView.separatorColor = .clear // StyleLayout.TableView.separatorColor
-        tableView.backgroundColor = Colors.veryLightGray
+//        tableView.backgroundColor = Colors.veryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            tableView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            tableView.backgroundColor = Colors.veryLightGray
+        }
         tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
@@ -197,11 +211,25 @@ extension EditTokensViewController: UISearchControllerDelegate {
     func willPresentSearchController(_ searchController: UISearchController) {
         searchController.searchBar.barTintColor = Colors.veryVeryLightGray
         searchController.searchBar.tintColor = Colors.darkRed
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            searchController.searchBar.barTintColor = UIColor.secondarySystemBackground
+            searchController.searchBar.searchTextField.textColor = UIColor.label
+        }
     }
 
     func willDismissSearchController(_ searchController: UISearchController) {
         searchController.searchBar.barTintColor = Colors.veryVeryLightGray
         searchController.searchBar.tintColor = Colors.darkRed
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            searchController.searchBar.barTintColor = UIColor.secondarySystemBackground
+            searchController.searchBar.searchTextField.textColor = UIColor.label
+        }
     }
 }
 

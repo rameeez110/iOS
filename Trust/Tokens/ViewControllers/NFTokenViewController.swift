@@ -83,7 +83,15 @@ final class NFTokenViewController: UIViewController {
         externalButton.setTitle(viewModel.externalButtonTitle, for: .normal)
         externalButton.addTarget(self, action: #selector(externalTap), for: .touchUpInside)
 
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = .white
+        }
         title = viewModel.title
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(.spacer(height: 15))

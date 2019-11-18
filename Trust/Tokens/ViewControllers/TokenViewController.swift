@@ -55,7 +55,15 @@ final class TokenViewController: UIViewController {
         super.init(nibName: "TokenViewController", bundle: nil)
 
         navigationItem.title = viewModel.title
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = .white
+        }
         tableView.tableFooterView = UIView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self

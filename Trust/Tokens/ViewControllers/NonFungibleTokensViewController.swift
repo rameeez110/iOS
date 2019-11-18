@@ -27,7 +27,15 @@ final class NonFungibleTokensViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = viewModel.tableViewBacgroundColor
+//        tableView.backgroundColor = viewModel.tableViewBacgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            tableView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            tableView.backgroundColor = viewModel.tableViewBacgroundColor
+        }
         view.addSubview(tableView)
         tableView.register(R.nib.nonFungibleTokenViewCell(), forCellReuseIdentifier: R.nib.nonFungibleTokenViewCell.name)
         NSLayoutConstraint.activate([

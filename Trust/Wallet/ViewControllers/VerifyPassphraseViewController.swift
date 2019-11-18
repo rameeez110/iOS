@@ -26,7 +26,7 @@ enum VerifyStatus {
 
     var textColor: UIColor {
         switch self {
-        case .empty, .progress, .correct: return Colors.black
+        case .empty, .progress, .correct: return Colors.black()
         case .invalid: return Colors.red
         }
     }
@@ -119,7 +119,15 @@ class VerifyPassphraseViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: R.string.localizable.skip(), style: .plain, target: self, action: #selector(skipAction))
 
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = .white
+        }
 
         contentView.isEditable = true
         contentView.words = []

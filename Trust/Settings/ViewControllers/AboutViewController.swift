@@ -44,6 +44,11 @@ final class AboutViewController: FormViewController {
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textAlignment = .left
                 cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
 
             +++ Section()
@@ -52,6 +57,14 @@ final class AboutViewController: FormViewController {
                 $0.title = R.string.localizable.settingsVersionLabelTitle()
                 $0.value = Bundle.main.fullVersion
                 $0.disabled = true
+            }.cellUpdate { cell, _ in
+                cell.textLabel?.textAlignment = .left
+                cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
         // visit bundle affair creek enter speak enjoy diesel novel seek attitude wet
 //            +++ Section(R.string.localizable.poweredBy())
@@ -72,6 +85,11 @@ final class AboutViewController: FormViewController {
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.textAlignment = .left
             cell.textLabel?.textColor = .black
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
         }
     }
 

@@ -6,7 +6,7 @@ import UIKit
 final class TokensHeaderView: UIView {
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.textColor = Colors.black
+        label.textColor = Colors.black()
         label.textAlignment = .center
         return label
     }()

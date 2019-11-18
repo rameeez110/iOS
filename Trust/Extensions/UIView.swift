@@ -32,7 +32,15 @@ extension UIView {
     static func spacer(height: CGFloat = 1, backgroundColor: UIColor = .clear, alpha: CGFloat = 1) -> UIView {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = backgroundColor
+//        view.backgroundColor = backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = backgroundColor
+        }
         view.alpha = alpha
         NSLayoutConstraint.activate([
             view.heightAnchor.constraint(equalToConstant: height),
@@ -58,7 +66,15 @@ extension UIView {
     static func spacerWidth(_ width: CGFloat = 1, backgroundColor: UIColor = .clear, alpha: CGFloat = 1, priority: UILayoutPriority = UILayoutPriority(rawValue: 1000)) -> UIView {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = backgroundColor
+//        view.backgroundColor = backgroundColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            view.backgroundColor = backgroundColor
+        }
         view.alpha = alpha
 
         let width = view.widthAnchor.constraint(equalToConstant: width)

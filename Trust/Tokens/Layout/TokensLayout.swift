@@ -20,7 +20,7 @@ struct TokensLayout {
             // return 44
         }
 
-        static let amountTextColor = Colors.black
+        static let amountTextColor = Colors.black()
         static let currencyAmountTextColor = Colors.lightGray
         static let fiatAmountTextColor = Colors.gray
 

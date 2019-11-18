@@ -78,7 +78,15 @@ final class SearchTokenResultsController: UITableViewController {
         tableView.register(R.nib.editTokenTableViewCell(), forCellReuseIdentifier: R.nib.editTokenTableViewCell.name)
         tableView.keyboardDismissMode = .onDrag
         tableView.separatorStyle = .none
-        tableView.backgroundColor = Colors.veryLightGray
+//        tableView.backgroundColor = Colors.veryLightGray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            tableView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            tableView.backgroundColor = Colors.veryLightGray
+        }
     }
 
     private func token(for indexPath: IndexPath) -> (token: TokenObject, local: Bool) {

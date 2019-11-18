@@ -94,6 +94,14 @@ final class SettingsViewController: FormViewController, Coordinator {
                 }
             }.cellSetup { cell, _ in
                 cell.imageView?.image = R.image.settings_colorful_security()
+            }.cellUpdate { cell, _ in
+                cell.textLabel?.textAlignment = .left
+                cell.textLabel?.textColor = .black
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
             }
 
             <<< autoLockRow
@@ -111,6 +119,11 @@ final class SettingsViewController: FormViewController, Coordinator {
             }.cellUpdate { cell, _ in
                 cell.imageView?.image = R.image.settings_colorful_notifications()
                 cell.textLabel?.text = R.string.localizable.settingsPushNotificationsTitle()
+                if #available(iOS 13.0, *) {
+                    // use the feature only available in iOS 9
+                    // for ex. UIStackView
+                    cell.textLabel?.textColor = .label
+                }
                 cell.accessoryType = .disclosureIndicator
             }
 
@@ -149,6 +162,11 @@ final class SettingsViewController: FormViewController, Coordinator {
             row.cellStyle = .value1
         }.cellUpdate { cell, _ in
             cell.textLabel?.textColor = .black
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
             cell.imageView?.image = R.image.settings_colorful_wallets()
             cell.textLabel?.text = R.string.localizable.wallets()
             cell.detailTextLabel?.text = String(viewModel.name.prefix(14))
@@ -196,6 +214,14 @@ final class SettingsViewController: FormViewController, Coordinator {
             }
         }.cellSetup { cell, _ in
             cell.imageView?.image = R.image.settings_colorful_currency()
+        }.cellUpdate { cell, _ in
+            cell.textLabel?.textAlignment = .left
+            cell.textLabel?.textColor = .black
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
         }
     }
 
@@ -209,6 +235,11 @@ final class SettingsViewController: FormViewController, Coordinator {
             }, onDismiss: { _ in })
         }.cellUpdate { cell, _ in
             cell.textLabel?.textColor = .black
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
             cell.imageView?.image = R.image.settings_colorful_about()
             cell.textLabel?.text = R.string.localizable.settingsAboutTitle()
             cell.accessoryType = .disclosureIndicator
@@ -225,6 +256,11 @@ final class SettingsViewController: FormViewController, Coordinator {
             }, onDismiss: nil)
         }.cellUpdate { cell, _ in
             cell.textLabel?.textColor = .black
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
             cell.imageView?.image = R.image.settings_colorful_dappbrowser()
             cell.textLabel?.text = R.string.localizable.settingsBrowserTitle()
             cell.accessoryType = .disclosureIndicator
@@ -240,6 +276,11 @@ final class SettingsViewController: FormViewController, Coordinator {
         }.cellUpdate { cell, _ in
             cell.imageView?.image = R.image.settings_colorful_privacy()
             cell.textLabel?.text = R.string.localizable.settingsPrivacyTitle()
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
             cell.accessoryType = .disclosureIndicator
         }
     }
@@ -255,6 +296,11 @@ final class SettingsViewController: FormViewController, Coordinator {
         }.cellUpdate { cell, _ in
             cell.imageView?.image = R.image.settings_colorful_developer()
             cell.textLabel?.text = R.string.localizable.developer()
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
             cell.accessoryType = .disclosureIndicator
         }
     }
@@ -296,6 +342,11 @@ final class SettingsViewController: FormViewController, Coordinator {
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.textAlignment = .left
             cell.textLabel?.textColor = .black
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                cell.textLabel?.textColor = .label
+            }
         }
     }
 

@@ -33,7 +33,15 @@ final class PassphraseView: UIView {
 
         addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
+//        collectionView.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            collectionView.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            collectionView.backgroundColor = .white
+        }
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(R.nib.wordCollectionViewCell)

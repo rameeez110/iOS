@@ -43,7 +43,15 @@ final class LockView: UIView {
     }
 
     private func addUiElements() {
-        backgroundColor = UIColor.white
+//        self.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            self.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            backgroundColor = .white
+        }
         addSubview(lockTitle)
         addSubview(characterView)
     }

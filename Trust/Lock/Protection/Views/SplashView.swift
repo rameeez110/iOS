@@ -5,7 +5,15 @@ import UIKit
 final class SplashView: UIView {
     init() {
         super.init(frame: CGRect.zero)
-        backgroundColor = .white
+//        self.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            self.backgroundColor = UIColor.systemBackground
+        } else {
+            // or use some work around
+            backgroundColor = .white
+        }
         let logoImageView = UIImageView(image: R.image.launch_screen_logo())
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(logoImageView)

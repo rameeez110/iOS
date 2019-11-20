@@ -174,6 +174,15 @@ class SendViewController: UIViewController { //: FormViewController {
         amountTextField.keyboardType = .decimalPad
         amountTextField.rightView = amountRightView
         amountTextField.rightViewMode = .always
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            amountTextField.attributedPlaceholder = NSAttributedString(string: "\(self.viewModel.currentPair.left) " + NSLocalizedString("send.amount.textField.placeholder", value: "Amount", comment: ""),
+                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.label])
+            recipientAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("send.recipientAddress.textField.placeholder", value: "Recipient Address", comment: ""),
+                                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.label])
+        }
     }
 
     func addressField() -> TextFloatLabelRow {

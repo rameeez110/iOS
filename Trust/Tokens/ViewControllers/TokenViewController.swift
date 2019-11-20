@@ -148,6 +148,13 @@ final class TokenViewController: UIViewController {
         marketPriceLabel.textColor = viewModel.marketPriceTextColor
         marketPriceLabel.font = viewModel.marketPriceFont
 
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            self.marketPriceLabel.textColor = .label
+            self.fiatAmountLabel.textColor = .label
+        }
+
         percentChange.text = viewModel.percentChange
         percentChange.textColor = viewModel.percentChangeColor
         percentChange.font = viewModel.percentChangeFont

@@ -74,6 +74,15 @@ final class BrowserNavigationBar: UINavigationBar {
 
         addSubview(stackView)
 
+        DispatchQueue.main.async {
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                self.barTintColor = Colors.darkRed
+                self.tintColor = .black
+            }
+        }
+
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
             stackView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor, constant: 10),

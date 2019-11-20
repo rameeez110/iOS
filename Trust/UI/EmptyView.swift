@@ -26,12 +26,19 @@ final class EmptyView: UIView {
         self.onRetry = onRetry
         super.init(frame: frame)
 
-        backgroundColor = .white
-
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = title
         titleLabel.font = viewModel.descriptionFont
-        titleLabel.textColor = viewModel.descriptionTextColor
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            titleLabel.textColor = .label
+            backgroundColor = .systemBackground
+        } else {
+            backgroundColor = .white
+            titleLabel.textColor = viewModel.descriptionTextColor
+        }
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
 

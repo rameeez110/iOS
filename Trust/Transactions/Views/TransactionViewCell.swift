@@ -84,7 +84,7 @@ final class TransactionViewCell: UITableViewCell {
             // for ex. UIStackView
             backgroundColor = UIColor.systemBackground
             titleLabel.textColor = UIColor.label
-            subTitleLabel.textColor = UIColor.label
+            subTitleLabel.textColor = .label
             amountLabel.textColor = UIColor.label
         }
     }

@@ -22,12 +22,19 @@ final class TransactionsEmptyView: UIView {
         self.onRetry = onRetry
         super.init(frame: .zero)
 
-        backgroundColor = .white
-
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = title
         titleLabel.font = viewModel.descriptionFont
-        titleLabel.textColor = viewModel.descriptionTextColor
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            backgroundColor = .systemBackground
+            titleLabel.textColor = .label
+        } else {
+            backgroundColor = .white
+            titleLabel.textColor = viewModel.descriptionTextColor
+        }
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = image

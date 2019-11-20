@@ -9,6 +9,14 @@ struct AppFormAppearance {
             $0.title = ""
         }.onRowValidationChanged {
             AppFormAppearance.onRowValidationChanged(baseCell: $0, row: $1)
+        }.cellUpdate { cell, _ in
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+
+                cell.textView.backgroundColor = .secondarySystemBackground
+                cell.textView.textColor = .label
+            }
         }
         callback(textArea)
         return textArea

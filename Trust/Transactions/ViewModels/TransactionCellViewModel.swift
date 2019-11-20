@@ -110,7 +110,7 @@ struct TransactionCellViewModel {
     }
 
     var subTitleFont: UIFont {
-        return UIFont(name: "Trenda-Thin", size: 12) ?? UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin)
+        return UIFont(name: "Trenda-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin)
     }
 
     var backgroundColor: UIColor {

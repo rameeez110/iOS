@@ -23,12 +23,19 @@ final class ErrorView: UIView {
         self.insets = insets
         super.init(frame: frame)
 
-        backgroundColor = .white
-
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = description
         descriptionLabel.font = viewModel.descriptionFont
-        descriptionLabel.textColor = viewModel.descriptionTextColor
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            backgroundColor = .systemBackground
+            descriptionLabel.textColor = .label
+        } else {
+            backgroundColor = .white
+            descriptionLabel.textColor = viewModel.descriptionTextColor
+        }
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = image

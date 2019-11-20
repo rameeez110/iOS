@@ -20,12 +20,19 @@ final class LoadingView: UIView {
         self.insets = insets
         super.init(frame: frame)
 
-        backgroundColor = .white
-
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = message
         label.font = viewModel.titleFont
-        label.textColor = viewModel.titleTextColor
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            backgroundColor = .systemBackground
+            label.textColor = .label
+        } else {
+            backgroundColor = .white
+            label.textColor = viewModel.titleTextColor
+        }
 
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = image

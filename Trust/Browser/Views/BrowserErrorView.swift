@@ -17,6 +17,11 @@ final class BrowserErrorView: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = Colors.gray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            label.textColor = .label
+        }
         label.font = UIFont(name: "Trenda-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

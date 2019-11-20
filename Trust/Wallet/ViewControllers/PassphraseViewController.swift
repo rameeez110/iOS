@@ -34,6 +34,12 @@ class PassphraseViewController: UIViewController {
             value: "These 12 words are the only way to restore your Trust wallet. \nSave them somewhere safe and secret.",
             comment: ""
         )
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            label.backgroundColor = UIColor.systemBackground
+            label.textColor = UIColor.label
+        }
         return label
     }()
 
@@ -86,6 +92,12 @@ class PassphraseViewController: UIViewController {
         wordsLabel.backgroundColor = .clear
         wordsLabel.font = UIFont(name: "Trenda-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .regular)
         wordsLabel.textColor = Colors.black()
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            wordsLabel.backgroundColor = UIColor.systemBackground
+            wordsLabel.textColor = UIColor.label
+        }
         wordsLabel.textAlignment = .center
         wordsLabel.numberOfLines = 3
         wordsLabel.isUserInteractionEnabled = true
@@ -94,6 +106,11 @@ class PassphraseViewController: UIViewController {
         let wordBackgroundView = PassphraseBackgroundShadow()
         wordBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         wordBackgroundView.isUserInteractionEnabled = true
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            wordBackgroundView.backgroundColor = UIColor.systemBackground
+        }
 
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false

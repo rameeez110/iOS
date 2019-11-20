@@ -45,6 +45,11 @@ struct TransactionAppearance {
         titleLabel.text = title
         titleLabel.font = titleStyle.font
         titleLabel.textColor = titleStyle.textColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            titleLabel.textColor = UIColor.label
+        }
         titleLabel.textAlignment = .left
 
         let subTitleLabel = UILabel(frame: .zero)
@@ -52,6 +57,11 @@ struct TransactionAppearance {
         subTitleLabel.text = subTitle
         subTitleLabel.font = subTitleStyle.font
         subTitleLabel.textColor = subTitleStyle.textColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            subTitleLabel.textColor = UIColor.label
+        }
         subTitleLabel.textAlignment = .left
         subTitleLabel.numberOfLines = 1
         subTitleLabel.adjustsFontSizeToFitWidth = true
@@ -93,6 +103,11 @@ struct TransactionAppearance {
         titleLabel.text = title
         titleLabel.font = titleStyle.font
         titleLabel.textColor = titleStyle.textColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            titleLabel.textColor = UIColor.label
+        }
         titleLabel.textAlignment = .left
         titleLabel.backgroundColor = backgroundColor
 
@@ -101,6 +116,11 @@ struct TransactionAppearance {
         subTitleLabel.text = subTitle
         subTitleLabel.font = subTitleStyle.font
         subTitleLabel.textColor = subTitleStyle.textColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            subTitleLabel.textColor = UIColor.label
+        }
         subTitleLabel.textAlignment = .right
         subTitleLabel.backgroundColor = backgroundColor
 

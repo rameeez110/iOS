@@ -18,9 +18,14 @@ func applyStyle() {
 
     UITextField.appearance().tintColor = Colors.darkRed
 
-    UIImageView.appearance().tintColor = Colors.darkRed
+    UIImageView.appearance().tintColor = Colors.white
+    if #available(iOS 13.0, *) {
+        // use the feature only available in iOS 9
+        // for ex. UIStackView
+        UIImageView.appearance().tintColor = .label
+    }
 
-    BrowserNavigationBar.appearance().setBackgroundImage(.filled(with: .white), for: .default)
+    BrowserNavigationBar.appearance().setBackgroundImage(.filled(with: Colors.darkRed), for: .default)
 }
 
 struct AppGlobalStyle {

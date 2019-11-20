@@ -26,7 +26,13 @@ enum VerifyStatus {
 
     var textColor: UIColor {
         switch self {
-        case .empty, .progress, .correct: return Colors.black()
+        case .empty, .progress, .correct:
+            if #available(iOS 13.0, *) {
+                // use the feature only available in iOS 9
+                // for ex. UIStackView
+                return UIColor.label
+            }
+            return Colors.black()
         case .invalid: return Colors.red
         }
     }
@@ -56,6 +62,11 @@ class SubtitleBackupLabel: UILabel {
         numberOfLines = 0
         font = AppStyle.paragraph.font
         textColor = Colors.gray
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            textColor = UIColor.label
+        }
     }
 
     required init?(coder _: NSCoder) {
@@ -168,6 +179,11 @@ class VerifyPassphraseViewController: UIViewController {
         let wordBackgroundView = PassphraseBackgroundShadow()
         wordBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(wordBackgroundView)
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            wordBackgroundView.backgroundColor = UIColor.secondarySystemBackground
+        }
 
         view.addSubview(stackView)
         view.addSubview(doneButton)
@@ -209,6 +225,11 @@ class VerifyPassphraseViewController: UIViewController {
         doneButton.isEnabled = status == .correct
         statusLabel.text = status.text
         statusLabel.textColor = status.textColor
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            statusLabel.textColor = UIColor.label
+        }
     }
 
     @objc private func doneAction(_: UIButton) {

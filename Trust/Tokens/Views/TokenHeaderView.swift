@@ -10,6 +10,11 @@ final class TokenHeaderView: UIView {
     lazy var amountLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = Colors.black()
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            label.textColor = UIColor.label
+        }
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -30,6 +35,11 @@ final class TokenHeaderView: UIView {
     lazy var fiatAmountLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = Colors.black()
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            label.textColor = UIColor.label
+        }
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -48,6 +48,11 @@ final class BrowserViewController: UIViewController {
         if isDebug {
             webView.configuration.preferences.setValue(true, forKey: Keys.developerExtrasEnabled)
         }
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            webView.backgroundColor = .systemBackground
+        }
         return webView
     }()
 
@@ -99,6 +104,12 @@ final class BrowserViewController: UIViewController {
         webView.addSubview(progressView)
         webView.bringSubviewToFront(progressView)
         view.addSubview(errorView)
+
+        if #available(iOS 13.0, *) {
+            // use the feature only available in iOS 9
+            // for ex. UIStackView
+            view.backgroundColor = .systemBackground
+        }
 
         NSLayoutConstraint.activate([
             webView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),

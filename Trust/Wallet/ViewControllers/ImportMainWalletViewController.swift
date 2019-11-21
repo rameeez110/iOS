@@ -72,7 +72,7 @@ final class ImportMainWalletViewController: FormViewController {
         let validatedError = mnemonicRow?.section?.form?.validate()
         guard let errors = validatedError, errors.isEmpty else { return }
 
-        let password = "" // passwordRow?.value ?? ""
+        let password = ""
         let mnemonicInput = mnemonicRow?.value?.trimmed ?? ""
         let words = mnemonicInput.components(separatedBy: " ").map { $0.trimmed.lowercased() }
 
@@ -81,7 +81,7 @@ final class ImportMainWalletViewController: FormViewController {
         let importType = ImportType.mnemonic(words: words, password: password, derivationPath: Coin.ethereum.derivationPath(at: 0))
 
         DispatchQueue.global(qos: .userInitiated).async {
-            self.keystore.importWallet(type: importType, coin: .ethereum) { result in
+            self.keystore.importWallet(type: importType, coin: .ether1) { result in
                 switch result {
                 case let .success(account):
                     self.addWallets(wallet: account)

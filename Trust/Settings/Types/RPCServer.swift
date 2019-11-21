@@ -50,8 +50,8 @@ enum RPCServer {
 
     var isDisabledByDefault: Bool {
         switch self {
-        case .ether1, .xerom: return false
-        case .main, .poa, .classic, .callisto, .gochain: return true
+        case .ether1, .xerom, .poa, .classic, .callisto, .gochain: return false
+        case .main: return true
         }
     }
 

@@ -14,12 +14,12 @@ struct CoinViewModel {
         switch coin {
         case .bitcoin: return "Bitcoin"
         case .ethereum: return "Ethereum"
+        case .ether1: return "Ether-1"
+        case .xerom: return "Xerom"
         case .ethereumClassic: return "Ethereum Classic"
         case .poa: return "POA Network"
         case .callisto: return "Callisto"
         case .gochain: return "GoChain"
-        case .ether1: return "Ether-1"
-        case .xerom: return "Xerom"
         }
     }
 
@@ -27,12 +27,12 @@ struct CoinViewModel {
         switch coin {
         case .ethereum: return "ETH"
         case .ethereumClassic: return "ETC"
+        case .ether1: return "ETHO"
+        case .xerom: return "XERO"
         case .callisto: return "CLO"
         case .poa: return "POA"
         case .gochain: return "GO"
         case .bitcoin: return "Bitcoin"
-        case .ether1: return "ETHO"
-        case .xerom: return "XERO"
         }
     }
 
@@ -40,12 +40,12 @@ struct CoinViewModel {
         switch coin {
         case .bitcoin: return .none
         case .ethereum: return R.image.ethereum_1()
+        case .ether1: return R.image.ethereum64()
+        case .xerom: return R.image.ethereum1313500()
         case .ethereumClassic: return R.image.ethereum61()
         case .poa: return R.image.ethereum99()
         case .callisto: return R.image.ethereum820()
         case .gochain: return R.image.ethereum60()
-        case .ether1: return R.image.ethereum64()
-        case .xerom: return R.image.ethereum1313500()
         }
     }
 

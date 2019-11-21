@@ -44,8 +44,8 @@ struct CoinViewModel {
         case .poa: return R.image.ethereum99()
         case .callisto: return R.image.ethereum820()
         case .gochain: return R.image.ethereum60()
-        case .ether1: return R.image.ethereum61()
-        case .xerom: return R.image.ethereum60()
+        case .ether1: return R.image.ethereum64()
+        case .xerom: return R.image.ethereum1313500()
         }
     }
 

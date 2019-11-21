@@ -160,8 +160,7 @@ class ConfirmPaymentViewController: UIViewController {
                 subTitle: detailsViewModel.totalText,
                 titleStyle: .headingSemiBold,
                 subTitleStyle: .paragraph,
-                layoutMargins: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15),
-                backgroundColor: UIColor(hex: "faf9f9")
+                layoutMargins: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
             ),
             TransactionAppearance.divider(color: Colors.lightGray, alpha: 0.3),
         ]
